@@ -34,8 +34,7 @@ class Bot(discord.Client):
             sugye = self.mishnah[self.rng.randint(0, len(self.mishnah) + 1)]
             url = f"https://www.sefaria.org/Mishnah_{sugye['Order'].replace(' ', '_')}.{sugye['Chapter']}.{sugye['Verse']}?lang=bi"
             # Get the English text. Convert HTML tags to markdown tags.
-            en = sugye['en'][:]
-            en = en.replace("<b>", "**").replace("</b>", "**").replace("<i>", "_").replace("</i>", "_")
+            en = sugye['en'].replace("<b>", "**").replace("</b>", "**").replace("<i>", "_").replace("</i>", "_")
             # Create a citation.
             citation = f"{sugye['Order']} {sugye['Chapter']}.{sugye['Verse']}"
             # Get the text.
