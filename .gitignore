@@ -1,1 +1,3 @@
 .idea/
+secrets.txt
+mishnabot/__pycache__/
