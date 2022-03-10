@@ -17,7 +17,7 @@ class Bot(discord.Client):
         :param seed: The seed. If None, the seed is random.
         """
 
-        self.channel: int = channel
+        self.channel: int = int(channel)
         self.mishnah = loads(Path(resource_filename(__name__, "data/mishnah.json")).read_text())
         if seed is None:
             self.rng = Random()
@@ -49,4 +49,4 @@ class Bot(discord.Client):
             sleep(86400)
 
     async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
+        pass
