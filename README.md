@@ -1,8 +1,14 @@
-# Mishnabot
+# ![](logo_small.png)Mishnabot 
 
-Discord bot that posts a random mishnah sugye once a day.
+Mishnabot is a Discord bot that posts a random mishnah sugye once per day.
 
-![](logo.png)
+# Covenant
+
+This software uses the MIT license, which you can read [here](LICENSE).
+
+This software was originally made for [Shel Maala](https://www.shelmaala.com/) in order to enable the creation of the Queer Talmud. Alternative use cases, such as the study of the non-queer Talmud, are theoretically possible but not actively supported by the developers. Usage of this software to suppress the Queer Talmud is prohibited.
+
+The user of this software may not be an individual or entity, or a representative, agent, affiliate, successor, attorney, or assign of an individual or entity, identified by the Boycott, Divestment, Sanctions ("BDS") movement on its website ([https://bdsmovement.net/](https://bdsmovement.net/) and [https://bdsmovement.net/get-involved/what-to-boycott](https://bdsmovement.net/get-involved/what-to-boycott)) as a target for boycott. *[Source: The Hippocratic License](https://firstdonoharm.dev/#hippocratic-license-3-0)*
 
 # Requirements
 
@@ -50,3 +56,4 @@ In a terminal:
 5. `python3 -m pip install -e .`
 6. `exit`
 7. `python3 ssh.py` This will start running the bot. On Windows, run `py -3 ssh.py` instead.
+
