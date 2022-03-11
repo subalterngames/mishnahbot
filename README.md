@@ -10,7 +10,6 @@ Discord bot that posts a random mishnah sugye once a day.
 - On your computer, git and Python 3.6 or newer
 - On the server, Python 3.6 or newer
 
-
 # Setup
 
 ## 1. Discord
