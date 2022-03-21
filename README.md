@@ -1,6 +1,6 @@
 # ![](logo_small.png)Mishnabot 
 
-Mishnabot is a Discord bot that posts a random mishnah sugye once per day.
+Mishnabot is a Discord bot that posts a random mishnah sugye once per day. The bilingual Mishnah text was scraped from [Sefaria](https://www.sefaria.org/texts).
 
 # Covenant
 
