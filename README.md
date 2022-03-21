@@ -23,7 +23,7 @@ The user of this software may not be an individual or entity, or a representativ
 1. [Create a Discord bot.](https://gizmodo.com/how-to-make-a-discord-bot-1847378375)
 2. [Get the ID of the channel you want the bot to post to.](https://docs.statbot.net/docs/faq/general/how-find-id/)
 3. Get the OAuth2 client ID of the bot (you'll need this in order to add it to the channel).
-3. Add the bot to the channel.
+3. [Add the bot to the channel.](https://discord.com/oauth2/authorize?client_id=945422849622032395&scope=bot&permissions=0)
 
 ## 2. Your remote server
 
