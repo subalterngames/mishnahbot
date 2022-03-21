@@ -15,6 +15,7 @@ The user of this software may not be an individual or entity, or a representativ
 - A remote server
 - On your computer, git and Python 3.6 or newer
 - On the server, Python 3.6 or newer
+- Admin privileges on the target Discord server
 
 # Setup
 
