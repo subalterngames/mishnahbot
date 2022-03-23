@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mishnabot',
-    version="0.0.1",
+    version="1.0.0",
     description='Discord bot that posts a random sugye per day.',
     long_description='Discord bot that posts a random sugye per day.',
     long_description_content_type='text/markdown',
@@ -11,7 +11,7 @@ setup(
     author='Esther Alter',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development',
         'License :: OSI Approved :: BSD License',

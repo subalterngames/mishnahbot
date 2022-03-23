@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
-import spur
+from mishnabot.ssh import ssh
+
 
 """
 Run mishnabot on a remote server. This assumes that you've already uploaded it (see `ftp.py`).
@@ -23,14 +24,11 @@ if __name__ == "__main__":
     token = re.search(r"token=(.*)", secrets).group(1)
     # Get the Discord channel.
     channel = re.search(r"channel=(.*)", secrets).group(1)
-    # Get SSH credentials.
-    ssh_username = re.search(r"ssh_username=(.*)", secrets).group(1)
-    ssh_password = re.search(r"ssh_password=(.*)", secrets).group(1)
-    hostname = re.search(r"hostname=(.*)", secrets).group(1)
-    cwd = re.search(r"ssh_cwd=(.*)", secrets).group(1)
     # Spawn a daemon process and run the bot.
-    shell = spur.SshShell(hostname=hostname, username=ssh_username, password=ssh_password)
-    shell.spawn(["python3", "run.py",
+    ssh(command=["python3", "run.py",
                  "--token", token,
-                 "--channel", channel],
-                cwd=cwd)
+                 "--channel", channel,
+                 "--shomer",
+                 "--logging"],
+        cwd=re.search(r"ssh_cwd=(.*)", secrets).group(1),
+        daemon=True)

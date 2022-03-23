@@ -1,6 +1,6 @@
-# ![](logo_small.png)Mishnabot 
+# ![](logo_small.png) Mishnabot 
 
-Mishnabot is a Discord bot that posts a random mishnah sugye once per day. The bilingual Mishnah text was scraped from [Sefaria](https://www.sefaria.org/texts).
+Mishnabot is a Discord bot that posts a random mishnah sugye once per day (except on Shabbos). The bilingual Mishnah text was scraped from [Sefaria](https://www.sefaria.org/texts).
 
 # Covenant
 
@@ -56,5 +56,16 @@ In a terminal:
 4. `cd path/to/mishnabot`
 5. `python3 -m pip install -e .`
 6. `exit`
-7. `python3 ssh.py` This will start running the bot. On Windows, run `py -3 ssh.py` instead.
+7. `python3 launch.py` This will start running the bot. On Windows, run `py -3 launch.py` instead.
 
+# Changelog
+
+## 1.0.0
+
+- Added parameter `shomer` to `Bot` and `run.py`. If True, don't post on Shabbos
+- Added parameter `logging` to `Bot` and `run.py` If True, log messages
+  - Added logging to `Bot`
+- Moved ssh code to `mishnabot.ssh.py`
+  - Added `get_log.py` and `get_process.py` to check on the bot's status
+- Renamed `ssh.py` to `launch.py`
+- Explicitly set which files get uploaded via `ftp.py`
