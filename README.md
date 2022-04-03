@@ -60,6 +60,15 @@ In a terminal:
 
 # Changelog
 
+## 1.0.2
+
+- Fixed: `run.py` args `--shomer` and `--logging` aren't actually used.
+- Added arg `--shabbos` to `run.py` and `Bot` to set which day is Shabbos.
+
+## 1.0.1
+
+Minor changes
+
 ## 1.0.0
 
 - Added parameter `shomer` to `Bot` and `run.py`. If True, don't post on Shabbos

@@ -29,6 +29,7 @@ if __name__ == "__main__":
                  "--token", token,
                  "--channel", channel,
                  "--shomer",
+                 "--shabbos", str(6),
                  "--logging"],
         cwd=re.search(r"ssh_cwd=(.*)", secrets).group(1),
         daemon=True)

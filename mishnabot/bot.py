@@ -13,11 +13,12 @@ class Bot(discord.Client):
     Post a random mishnah sugye every day.
     """
 
-    def __init__(self, channel: int, seed: int = None, shomer: bool = True, logging: bool = True):
+    def __init__(self, channel: int, seed: int = None, shomer: bool = True, shabbos: int = 5, logging: bool = True):
         """
         :param channel: The ID of the channel.
         :param seed: The seed. If None, the seed is random.
         :param shomer: If True, don't post on Shabbos.
+        :param shabbos: The day of the week of Shabbos. 1 = Monday.
         :param logging: If True, log messages.
         """
 
@@ -28,6 +29,7 @@ class Bot(discord.Client):
         else:
             self.rng = Random(seed)
         self.shomer: bool = shomer
+        self.shabbos: int = shabbos
         self.logging: bool = logging
         super().__init__()
 
@@ -38,7 +40,7 @@ class Bot(discord.Client):
         while True:
             today = datetime.today()
             # Don't post on Shabbos.
-            if self.shomer and today.isoweekday() == 5:
+            if self.shomer and today.isoweekday() == self.shabbos:
                 self.log(f"{today}: Skipping because it's Shabbos.")
             else:
                 # Get a random sugye.
