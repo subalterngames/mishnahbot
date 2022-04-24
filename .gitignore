@@ -1,3 +1,5 @@
 .idea/
 secrets.txt
 mishnabot/__pycache__/
+bot_secrets.txt
+log.txt

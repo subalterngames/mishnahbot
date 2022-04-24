@@ -24,7 +24,7 @@ The user of this software may not be an individual or entity, or a representativ
 1. [Create a Discord bot.](https://gizmodo.com/how-to-make-a-discord-bot-1847378375)
 2. [Get the ID of the channel you want the bot to post to.](https://docs.statbot.net/docs/faq/general/how-find-id/)
 3. Get the OAuth2 client ID of the bot (you'll need this in order to add it to the channel).
-3. [Add the bot to the channel.](https://discord.com/oauth2/authorize?client_id=945422849622032395&scope=bot&permissions=0) (Replace the client ID with your bot's client ID)
+4. [Add the bot to the channel.](https://discord.com/oauth2/authorize?client_id=945422849622032395&scope=bot&permissions=0) (Replace the client ID with your bot's client ID)
 
 ## 2. Your remote server
 
@@ -37,15 +37,24 @@ The user of this software may not be an individual or entity, or a representativ
 2. Create a file named `secrets.txt` in the same directory as this file, formatted like this:
 
 ```
-token=BOT_TOKEN
-channel=CHANNEL_ID
 ssh_username=USERNAME
 ssh_password=PASSWORD
 ftp_username=USERNAME
 ftp_password=PASSWORD
-ftp=ftp.subalterngames.com
-hostname=talmud.subalterngames.com
-ssh_cwd=talmud.subalterngames.com/public
+ftp=ftp.URL
+hostname=URL
+ssh_cwd=URL/PATH
+```
+
+- `USERNAME` and `PASSWORD` are your login credentials.
+- `URL` is the server url, for example `my_server.com`
+- `URL/PATH` is the path to the directory where the Discord bot should be uploaded. The `.htaccess` file will be uploaded here and everything else will be uploaded to `URL/PATH/public/`.
+
+3. Create a file named `bot_secrets.txt` in the same directory as this file, formatted like this:
+
+```
+token=BOT_TOKEN
+channel=CHANNEL_ID
 ```
 
 In a terminal:
@@ -55,10 +64,31 @@ In a terminal:
 3. `ssh USERNAME@SERVER` 
 4. `cd path/to/mishnabot`
 5. `python3 -m pip install -e .`
-6. `exit`
-7. `python3 launch.py` This will start running the bot. On Windows, run `py -3 launch.py` instead.
+6. `timedatectl` to get the timezone of your server.
+7. `crontab -e`
+8. Add this line to the crontab file:
+
+```
+0 15 * * 0-5 python3 ~/PATH/run.py > ~/path/to/log.txt
+```
+
+Replace `15` (3:00 PM) with the correct time.
+
+Replace `PATH` with the actual path on the server, for example `~/my_server.com/public/run.py`
+
+9. To exit nano, `ctrl+x` and `y` and `enter`
+10. `exit`
 
 # Changelog
+
+## 1.1.0
+
+- Removed `launch.py`
+- Removed `get_log.py`
+- Removed `get_process.py`
+- Removed `ssh.py`
+- Removed `spur` requirement
+- Refactored most of `run.py` so that it works via crontab
 
 ## 1.0.2
 

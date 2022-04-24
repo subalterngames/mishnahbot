@@ -1,4 +1,6 @@
-from argparse import ArgumentParser
+import re
+import os
+from pathlib import Path
 from mishnabot.bot import Bot
 
 """
@@ -7,18 +9,17 @@ Run the bot.
 Usage:
 
 ```
-python3 run.py --token TOKEN --channel CHANNEL --shomer --shabbos SHABBOS --logging
+python3 run.py
 ```
 """
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("--token", type=str, help="Discord bot token")
-    parser.add_argument("--channel", type=int, help="Discord channel ID")
-    parser.add_argument("--shomer", action="store_true", help="If added, don't post on Shabbos")
-    parser.add_argument("--shabbos", type=int, help="Integer of which day is Shabbos. 1 = Monday.")
-    parser.add_argument("--logging", action="store_true", help="If added, enable logging")
-    args = parser.parse_args()
-    bot = Bot(channel=args.channel, shomer=args.shomer, logging=args.logging, shabbos=args.shabbos)
-    bot.run(args.token)
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    secrets = Path(dir_path).joinpath("bot_secrets.txt").read_text()
+    # Get the bot token.
+    token = re.search(r"token=(.*)", secrets).group(1)
+    # Get the Discord channel.
+    channel = re.search(r"channel=(.*)", secrets).group(1)
+    bot = Bot(channel=int(channel))
+    bot.run(token)

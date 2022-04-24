@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mishnabot',
-    version="1.0.2",
+    version="1.1.0",
     description='Discord bot that posts a random sugye per day.',
     long_description='Discord bot that posts a random sugye per day.',
     long_description_content_type='text/markdown',
@@ -22,5 +22,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     keywords='mishnah talmud jewish discord bot',
-    install_requires=['discord.py', 'spur'],
+    install_requires=['discord.py'],
 )
