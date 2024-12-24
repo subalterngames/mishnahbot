@@ -54,8 +54,14 @@ ssh_cwd=URL/PATH
 
 ```
 token=BOT_TOKEN
-channel=CHANNEL_ID
+mishnah_channel=CHANNEL_ID
+mussar_channel=CHANNEL_ID
+mussar_start=ISO_DATE
 ```
+
+`mussar_start` is the date in ISO format (`YYYY-MM-DD`, e.g. `2024-01-30`) on
+which you'd like to start the daily mussar prompts. Leave out the mussar
+information to disable daily mussar prompts.
 
 In a terminal:
 

@@ -12,20 +12,26 @@ class Bot(discord.Client):
     Post a random mishnah sugye every day.
     """
 
-    def __init__(self, channel: int, logging: bool = True):
+    def __init__(self, mishnah_channel: int, mussar_channel: int, mussar_start: str, logging: bool = True):
         """
-        :param channel: The ID of the channel.
+        :param mishnah_channel: The ID of the channel for posting Mishnah.
+        :param mussar_channel: The ID of the channel for posting Mussar
+        :param mussar_date: The start date in ISO format for the daily mussar practice
         :param logging: If True, log messages.
         """
 
-        self.channel: int = int(channel)
+        self.mishnah_channel: int = int(mishnah_channel)
         self.mishnah = loads(Path(resource_filename(__name__, "data/mishnah.json")).read_text())
+        self.mussar_channel: int = int(mussar_channel)
+        self.mussar_start: str = mussar_start
+        self.mussar_text = loads(Path(resource_filename(__name__, "data/every-day-holy-day.json")).read_text())
         self.logging: bool = logging
         super().__init__()
 
-    async def on_ready(self):
+
+    async def post_mishnah(self):
         # Connect to the Discord channel.
-        channel = self.get_channel(self.channel)
+        channel = self.get_channel(self.mishnah_channel)
         today = datetime.today()
         # Get a random sugye.
         sugye = self.mishnah[random.randint(0, len(self.mishnah) + 1)]
@@ -44,10 +50,44 @@ class Bot(discord.Client):
             # Post.
             for post in posts:
                 await channel.send(post)
-            # Quit.
-            await self.close()
         except Exception as e:
             self.log(str(e))
+
+
+    async def post_mussar(self):
+        # Connect to the Discord channel.
+        channel = self.get_channel(self.mussar_channel)
+
+        # Calculate the week & day of the practice
+        today = datetime.today()
+        start_date = datetime.fromisoformat(self.mussar_start)
+        delta = today - start_date
+        if delta.days < 0: return  # We haven't started yet
+        week = str(((delta.days // 7) % 52) + 1)  # Indexed from 1
+        day = str((delta.days % 7) + 1)
+
+        # Construct the text
+        post = [f"Daily mussar for {today.strftime('%a %b %d, %Y')}"]
+        post.append(f">>> **Week {week}: {self.mussar_text[week]['title'].title()}**")
+        post.append(f"Day {day}")
+        post.append("\n".join(self.mussar_text[week]['day_texts'][day]))
+        post.append(f"Focus Phrase: {self.mussar_text[week]['phrase']}")
+        post.append(f"Practice: {self.mussar_text[week]['practice']}")
+        post_str = "\n\n".join(post)
+
+        # Post
+        try:
+            await channel.send(post_str)
+        except Exception as e:
+            self.log(str(e))
+
+
+    async def on_ready(self):
+        await self.post_mishnah()
+        if self.mussar_channel and self.mussar_start:
+            await self.post_mussar()
+        await self.close()
+
 
     def log(self, message: str) -> None:
         """
